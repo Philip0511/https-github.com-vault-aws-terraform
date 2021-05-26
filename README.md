@@ -14,31 +14,24 @@ This repo is meant to provision everything you need for a new Vault instance wit
 
 ### Updating And Importing Route53 Zone
 
-Inside of the folder you'll need to run `terrafrom import aws_route53_zone.vault_zone {ZoneID}`, which will look something like this. `terrafrom import aws_route53_zone.vault_zone Z10382751R1PQTSM488845`. The Zone ID can be found in the Hosted Zones Menu in Route53 or by running `aws route53 list-hosted-zones`. It will return a code block like this.
-
-```
-{
-            "Id": "/hostedzone/Z10382751R1PQTSM488845",
-            "Name": "example.com.",
-            "CallerReference": "60b810f1-52cd-49da-y614-6b7b9527a858",
-            "Config": {
-                "Comment": "",
-                "PrivateZone": false
-            },
-```
-
-_You can grab the value in the ID that trails `/hostedzone/`._
-
 This section will need to have the domain updated to the correct one.
 
 ```
 resource "aws_route53_zone" "vault_zone" {
 
-  name = "example.com"
+  name = "example.com."
 
 }
 ```
+For example:
 
+```
+resource "aws_route53_zone" "vault_zone" {
+
+  name = "github.com."
+
+}
+```
 
 ### Updating Domain Within Script
 

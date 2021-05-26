@@ -215,9 +215,9 @@ resource "aws_instance" "vault" {
   }
 }
 
-resource "aws_route53_zone" "vault_zone" {
+data "aws_route53_zone" "vault_zone" {
 
-  name = "example.com" # Needs to be updated with domain in Route53 and imported using terrafrom import aws_route53_zone.vault_zone {ZoneID}
+  name = "example.com." # Needs to be updated with domain in Route53
 
 }
 
