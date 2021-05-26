@@ -44,8 +44,8 @@ mkdir /etc/vault
 # make certs directory
 mkdir /etc/vault/certs
 # run certbot update domain address and brackets removed to be route53 created in terraform 
-export VAULT_DOMAIN_ADDRESS={{vault.example.com}}
-echo "export VAULT_DOMAIN_ADDRESS={{vault.b1tsized.tech}}" >> ~./bashrc
+export VAULT_DOMAIN_ADDRESS=vault.{{example.com}}
+echo "export VAULT_DOMAIN_ADDRESS=vault.{{example.com}}" >> ~./bashrc
 certbot certonly --standalone -d $VAULT_DOMAIN_ADDRESS --non-interactive --agree-tos -m support@strongdm.com
 wget https://releases.hashicorp.com/vault/1.7.2/vault_1.7.2_linux_amd64.zip
 # unzip vault

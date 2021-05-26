@@ -223,7 +223,7 @@ data "aws_route53_zone" "vault_zone" {
 
 resource "aws_route53_record" "vault_dns" {
 
-  zone_id = aws_route53_zone.vault_zone.id
+  zone_id = data.aws_route53_zone.vault_zone.id
   name    = "vault"
   type    = "A"
   ttl     = "60"
