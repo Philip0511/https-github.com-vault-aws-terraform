@@ -1,4 +1,4 @@
-# Vault AWS Terrafor Quickstart
+# Vault AWS Terraform Quickstart
 
 This repo is meant to provision everything you need for a new Vault instance with a Route53 domain. 
 
