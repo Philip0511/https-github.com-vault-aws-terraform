@@ -1,6 +1,6 @@
 provider "aws" {
 
-  region = "us-west-2"
+  region = "us-east-2"
 
 }
 
@@ -262,7 +262,7 @@ resource "null_resource" "vault_install" {
   provisioner "remote-exec" {
 
     inline = [
-      "sudo chmod +x vault-install1.sh",
+      "sudo chmod +x vault-install.sh",
       "sudo ~/vault-install.sh"
     ]
 
