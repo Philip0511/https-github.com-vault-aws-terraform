@@ -36,9 +36,9 @@ You can either update them within those blocks using `default =` within the bloc
 Example:
 
 ```terraform
-region="us-west-2"
-vpc_name="vault-demo"
-route_53_domain="github.com
+region = "us-west-2"
+vpc_name = "vault-demo"
+route_53_domain = "github.com"
 ```
 
 ## Running the terraform
