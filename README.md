@@ -63,6 +63,10 @@ route_53_domain = "github.com"
     terraform apply --auto-approve
     ```
 
-5. Wait until the changes are applied. Server will automatically initialize and unseal. To be able to log in you'll need to ssh into the server and grab the root token from `/vault-keys`.
+5. Wait until the changes are applied. Server will automatically initialize and unseal. To be able to log in you'll need to ssh into the server and grab the root token from `/vault-keys`. Note: SSH keys were generated in the terraform folder. You should be able to ssh using the following command.
+
+    ```console
+    ssh -i "vault_priv_key.pem" ubuntu@{{vault_public_ip}}
+    ```
 
 6. Check domain web address on port `8200`. E.G. `https://vault.github.com:8200/`
