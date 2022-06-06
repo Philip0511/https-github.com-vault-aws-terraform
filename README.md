@@ -1,6 +1,6 @@
 # Vault AWS Terraform Quickstart
 
-This repo is meant to provision everything you need for a new Vault instance with a Route53 domain. 
+This repo is meant to provision everything you need for a new Vault instance with a Route53 domain.
 
 ## Pre-reqs
 
@@ -10,41 +10,59 @@ This repo is meant to provision everything you need for a new Vault instance wit
 
     - AWS Account
 
-## Things to update
+## Variables to include
 
-### Updating And Importing Route53 Zone
+You have a few variables required to run this code.
 
-This section will need to have the domain updated to the correct one.
+```terraform
+variable "region" {
+  description = "AWS Region to use for this Terraform"
+  type        = string
+}
 
-```
-resource "aws_route53_zone" "vault_zone" {
+variable "vpc_name" {
+  description = "Name you wish to give the VPC"
+  type        = string
+}
 
-  name = "example.com."
-
+variable "route_53_domain" {
+  description = "Route53 domain you would like to use"
+  type        = string
 }
 ```
-For example:
 
-```
-resource "aws_route53_zone" "vault_zone" {
+You can either update them within those blocks using `default =` within the blocks or create a `.tfvars` file that has values for all the variables.
 
-  name = "github.com."
+Example:
 
-}
-```
-
-### Updating Domain Within Script
-
-Inside the vault-install.sh script you'll need to update this variable to match the domain update within Route53 and brackets will need to be reomved.
-
-```
-export VAULT_DOMAIN_ADDRESS=vault.{{example.com}}
-echo "export VAULT_DOMAIN_ADDRESS=vault.{{example.com}}" >> ~./bashrc
+```terraform
+region="us-west-2"
+vpc_name="vault-demo"
+route_53_domain="github.com
 ```
 
-For Example:
+## Running the terraform
 
-```
-export VAULT_DOMAIN_ADDRESS=vault.github.com
-echo "export VAULT_DOMAIN_ADDRESS=vault.github.com" >> ~./bashrc
-```
+1. Clone the repo
+
+    ```console
+    git clone https://github.com/b1tsized/vault-aws-terraform.git
+    ```
+
+2. `cd` into the directory of the repo.
+
+3. Run `terraform init` within the directory
+
+    ```console
+    terraform init
+    ```
+
+4. Run `terraform apply -auto` after updating your variables.
+
+    ```console
+    terraform apply --auto-approve
+    ```
+
+5. Wait until the changes are applied. Server will automatically initialize and unseal. To be able to log in you'll need to ssh into the server and grab the root token from `/vault-keys`.
+
+6. Check domain web address on port `8200`. E.G. `https://vault.github.com:8200/`
