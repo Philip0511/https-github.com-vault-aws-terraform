@@ -107,9 +107,6 @@ systemctl daemon-reload
 # export vault address variable
 export VAULT_ADDR="https://$VAULT_DOMAIN_ADDRESS:8200"
 
-# set vault address to reload on reboot
-echo "export VAULT_ADDR=https://$VAULT_DOMAIN_ADDRESS:8200" >> ~/.bashrc
-
 # enable vault autocomplete
 vault -autocomplete-install
 complete -C /usr/bin/vault vault
@@ -121,8 +118,14 @@ systemctl start vault
 systemctl enable vault
 
 # initialize vault and save file
-vault operator init -key-shares=1 -key-threshold=1 | tee -a vault-keys
+vault operator init -key-shares=2 -key-threshold=2 | tee -a vault-keys
 
-KEY_1=$(cat vault-keys | grep 'Unseal Key 1' | awk '{print $4}')
+# exporting keys to unseal
+export KEY_1=$(cat vault-keys | grep 'Unseal Key 1' | awk '{print $4}')
 
+export KEY_2=$(cat vault-keys | grep 'Unseal Key 2' | awk '{print $4}')
+
+# unsealing vault
 vault operator unseal $KEY_1
+
+vault operator unseal $KEY_2

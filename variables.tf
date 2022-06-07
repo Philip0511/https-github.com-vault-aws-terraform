@@ -34,13 +34,27 @@ variable "sg_ingress_rules" {
       cidr_block  = "0.0.0.0/0"
       description = "ssh"
     },
+    {
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_block  = "0.0.0.0/0"
+      description = "http"
+    },
 
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      cidr_block  = "0.0.0.0/0"
+      description = "https"
+    },
     {
       from_port   = 8200
       to_port     = 8200
       protocol    = "tcp"
       cidr_block  = "0.0.0.0/0"
-      description = "Consul UI"
+      description = "Vault UI"
     },
 
     {
@@ -48,7 +62,7 @@ variable "sg_ingress_rules" {
       to_port     = 8500
       protocol    = "tcp"
       cidr_block  = "0.0.0.0/0"
-      description = "Vault UI"
+      description = "Consol UI"
     },
 
     {
@@ -56,7 +70,7 @@ variable "sg_ingress_rules" {
       to_port     = 8501
       protocol    = "tcp"
       cidr_block  = "0.0.0.0/0"
-      description = "Vault Cluster"
+      description = "Consol Gossip"
     }
   ]
 
